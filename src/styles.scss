@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+$primary-color: #1976d2;
+$warn-color: #d32f2f;
+$bg-color: #f9f9f9;
+$card-bg: #fff;
+$text-color: #333;
+$border-color: #e0e0e0;
+$spacing: 1rem;
+$mobile-breakpoint: 600px;
