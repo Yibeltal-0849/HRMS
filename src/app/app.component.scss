@@ -1,0 +1,45 @@
+/* app.component.scss */
+.sidenav-container {
+  height: 100vh;
+  display: flex;
+}
+
+.sidenav {
+  width: 20%;
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: white;
+    z-index: 1000;
+    transform: translateX(-100%);
+    &.open {
+      transform: translateX(0);
+    }
+  }
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+  margin-left: 240px;
+
+  @media (max-width: 390px) {
+    margin-left: 0;
+  }
+}
+
+.content {
+  padding: 16px;
+}
+
+.active {
+  background-color: rgba(25, 118, 210, 0.1);
+  font-weight: bold;
+}

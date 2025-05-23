@@ -1,0 +1,73 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username" />
+    <mat-error
+      *ngIf="
+        userForm.get('username').invalid && userForm.get('username').touched
+      "
+    >
+      {{ getErrorMessage("username") }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" />
+    <mat-error
+      *ngIf="userForm.get('email').invalid && userForm.get('email').touched"
+    >
+      {{ getErrorMessage("email") }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" type="password" />
+    <mat-hint>Optional (min 6 characters if set)</mat-hint>
+    <mat-error
+      *ngIf="
+        userForm.get('password').invalid && userForm.get('password').touched
+      "
+    >
+      {{ getErrorMessage("password") }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Role</mat-label>
+    <mat-select formControlName="role">
+      <mat-option *ngFor="let role of roles" [value]="role">{{
+        role | titlecase
+      }}</mat-option>
+    </mat-select>
+    <mat-error
+      *ngIf="userForm.get('role').invalid && userForm.get('role').touched"
+    >
+      {{ getErrorMessage("role") }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Employee (Optional)</mat-label>
+    <mat-select formControlName="employeeId">
+      <mat-option [value]="null">None</mat-option>
+      <mat-option *ngFor="let emp of employees" [value]="emp.id">
+        {{ emp.firstName }} {{ emp.lastName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="isActive">Active User</mat-checkbox>
+
+  <div class="form-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="userForm.invalid"
+    >
+      Save User
+    </button>
+  </div>
+</form>

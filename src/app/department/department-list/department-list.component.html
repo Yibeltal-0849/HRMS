@@ -1,0 +1,18 @@
+<div class="department-list">
+  <mat-card *ngFor="let dept of departments" class="department-card">
+    <mat-card-title>{{ dept.name }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ dept.description }}</p>
+      <p><strong>Location:</strong> {{ dept.location }}</p>
+      <p><strong>Budget:</strong> {{ dept.budget | currency }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="editDepartment(dept.id)">
+        Edit
+      </button>
+      <button mat-button color="warn" (click)="deleteDepartment(dept.id)">
+        Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

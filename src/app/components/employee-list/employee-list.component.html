@@ -1,77 +1,52 @@
-<!-- Container div for the employee list section -->
-<div class="employee-list-container">
-  <!-- Header section with action buttons -->
+<!-- <div class="employee-list-container">
   <div class="header-actions">
-    <!-- Button to navigate to the "Add New Employee" page -->
     <button
       mat-raised-button
       color="primary"
       (click)="router.navigate(['/employees/new'])"
+      appHighlight
     >
-      <!-- Material icon for "add" -->
       <mat-icon>add</mat-icon> Add New Employee
     </button>
   </div>
 
-  <!-- Card container from Angular Material -->
   <mat-card>
     <mat-card-content>
-      <!-- Show spinner when data is loading -->
       <div *ngIf="isLoading" class="loading-spinner">
         <mat-spinner></mat-spinner>
       </div>
 
-      <!-- Display table if data is not loading -->
       <table mat-table [dataSource]="employees" *ngIf="!isLoading">
-        <!-- ID Column Definition -->
         <ng-container matColumnDef="id">
-          <!-- Table header for ID -->
           <th mat-header-cell *matHeaderCellDef>ID</th>
-          <!-- Table cell for displaying employee ID -->
           <td mat-cell *matCellDef="let employee">{{ employee.id }}</td>
         </ng-container>
 
-        <!-- Name Column Definition -->
         <ng-container matColumnDef="name">
-          <!-- Table header for Name -->
           <th mat-header-cell *matHeaderCellDef>Name</th>
-          <!-- Table cell for displaying employee name -->
           <td mat-cell *matCellDef="let employee">{{ employee.name }}</td>
         </ng-container>
 
-        <!-- Department Column Definition -->
         <ng-container matColumnDef="departmentId">
-          <!-- Table header for Department -->
           <th mat-header-cell *matHeaderCellDef>Department</th>
-          <!-- Table cell for displaying employee department ID -->
           <td mat-cell *matCellDef="let employee">
             {{ employee.departmentId }}
           </td>
         </ng-container>
 
-        <!-- Job Column Definition -->
         <ng-container matColumnDef="jobId">
-          <!-- Table header for Job -->
           <th mat-header-cell *matHeaderCellDef>Job</th>
-          <!-- Table cell for displaying employee job ID -->
           <td mat-cell *matCellDef="let employee">{{ employee.jobId }}</td>
         </ng-container>
 
-        <!-- Salary Column Definition -->
         <ng-container matColumnDef="salaryId">
-          <!-- Table header for Salary -->
           <th mat-header-cell *matHeaderCellDef>Salary</th>
-          <!-- Table cell for displaying employee salary ID -->
           <td mat-cell *matCellDef="let employee">{{ employee.salaryId }}</td>
         </ng-container>
 
-        <!-- Actions Column Definition (Edit/Delete) -->
         <ng-container matColumnDef="actions">
-          <!-- Table header for Actions -->
           <th mat-header-cell *matHeaderCellDef>Actions</th>
-          <!-- Table cell for edit and delete buttons -->
           <td mat-cell *matCellDef="let employee">
-            <!-- Edit button: navigates to edit employee -->
             <button
               mat-icon-button
               color="primary"
@@ -79,7 +54,6 @@
             >
               <mat-icon>edit</mat-icon>
             </button>
-            <!-- Delete button: triggers delete function -->
             <button
               mat-icon-button
               color="warn"
@@ -90,11 +64,9 @@
           </td>
         </ng-container>
 
-        <!-- Render table header row based on defined columns -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <!-- Render data rows for each employee -->
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </mat-card-content>
   </mat-card>
-</div>
+</div> -->

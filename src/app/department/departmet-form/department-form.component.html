@@ -1,0 +1,42 @@
+<form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Name" formControlName="name" required />
+    <mat-error *ngIf="departmentForm.get('name').invalid"
+      >Name is required</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <textarea
+      matInput
+      placeholder="Description"
+      formControlName="description"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Location" formControlName="location" />
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      placeholder="Budget"
+      formControlName="budget"
+      type="number"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      placeholder="Head ID (Employee)"
+      formControlName="headId"
+      type="number"
+    />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    {{ isEdit ? "Update" : "Create" }} Department
+  </button>
+</form>

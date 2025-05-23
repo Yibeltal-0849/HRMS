@@ -1,44 +1,58 @@
 import { InMemoryDbService } from "angular-in-memory-web-api";
-import { Injectable } from "@angular/core";
 
-@Injectable({ providedIn: "root" })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const departments = [
-      { id: 1, name: "HR" },
-      { id: 2, name: "Engineering" },
+    const users = [
+      {
+        id: 1,
+        username: "admin",
+        email: "admin@example.com",
+        role: "admin",
+        isActive: true,
+      },
+      {
+        id: 2,
+        username: "manager",
+        email: "manager@example.com",
+        role: "manager",
+        isActive: true,
+      },
     ];
-    const employees = [
-      { id: 1, name: "Alice", departmentId: 1, jobId: 1, salaryId: 1 },
-    ];
-    const jobs = [{ id: 1, title: "Software Engineer" }];
-    const salaries = [{ id: 1, amount: 60000 }];
-    const candidates = [{ id: 1, name: "John Doe" }];
-    const jobApplications = [{ id: 1, candidateId: 1, jobId: 1 }];
-    const leaveRequests = [
-      { id: 1, employeeId: 1, fromDate: "2025-01-01", toDate: "2025-01-05" },
-    ];
-    const attendance = [
-      { id: 1, employeeId: 1, date: "2025-05-01", status: "Present" },
-    ];
-    const users = [{ id: 1, username: "admin", password: "admin123" }];
-    const performanceReviews = [
-      { id: 1, employeeId: 1, rating: 5, comment: "Excellent" },
-    ];
-    const companies = [{ id: 1, name: "Tech Corp" }];
 
-    return {
-      departments,
-      employees,
-      jobs,
-      salaries,
-      candidates,
-      jobApplications,
-      leaveRequests,
-      attendance,
-      users,
-      performanceReviews,
-      companies,
-    };
+    const employees = [
+      { id: 1, name: "John Doe", position: "Developer", department: "IT" },
+      { id: 2, name: "Jane Smith", position: "Manager", department: "HR" },
+    ];
+    const departments = [
+      {
+        id: 1,
+        name: "HR",
+        description: "Human Resources",
+        location: "1st Floor",
+        budget: 50000,
+        headId: 101,
+      },
+      {
+        id: 2,
+        name: "IT",
+        description: "Information Tech",
+        location: "2nd Floor",
+        budget: 120000,
+        headId: 102,
+      },
+    ];
+
+    // Add other collections as needed
+    return { users, employees, departments };
+  }
+
+  // Override genId to ensure entities always have an id
+  genId<T extends { id: number }>(
+    collection: T[],
+    collectionName: string
+  ): number {
+    return collection.length > 0
+      ? Math.max(...collection.map((item) => item.id)) + 1
+      : 1;
   }
 }
