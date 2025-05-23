@@ -30,23 +30,35 @@ const routes: Routes = [
     //   loadChildren: () =>
     //     import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
+
+  //user
   {
     path: "users",
     loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
   },
+
+  //department
   {
     path: "departments",
     loadChildren: () =>
       import("./department/department.module").then((m) => m.DepartmentModule),
   },
-  { path: "**", redirectTo: "dashboard" },
-
+  // { path: "**", redirectTo: "dashboard" }, lead to error
   {
     path: "departments",
     loadChildren: () =>
       import("./department/department.module").then((m) => m.DepartmentModule),
   },
   { path: "", redirectTo: "departments/list", pathMatch: "full" },
+
+  //employee
+  { path: "", redirectTo: "employees/list", pathMatch: "full" },
+  { path: "", redirectTo: "employees/list", pathMatch: "full" },
+  {
+    path: "employees",
+    loadChildren: () =>
+      import("./employee/employee.module").then((m) => m.EmployeeModule),
+  },
 ];
 
 @NgModule({

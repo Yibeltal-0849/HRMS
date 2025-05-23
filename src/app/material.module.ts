@@ -18,6 +18,10 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 
+//employee
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -55,6 +59,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
     MatSnackBarModule,
     MatTableModule,
     MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class MaterialModule {}

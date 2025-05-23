@@ -19,10 +19,6 @@ export class InMemoryDataService implements InMemoryDbService {
       },
     ];
 
-    const employees = [
-      { id: 1, name: "John Doe", position: "Developer", department: "IT" },
-      { id: 2, name: "Jane Smith", position: "Manager", department: "HR" },
-    ];
     const departments = [
       {
         id: 1,
@@ -39,6 +35,31 @@ export class InMemoryDataService implements InMemoryDbService {
         location: "2nd Floor",
         budget: 120000,
         headId: 102,
+      },
+    ];
+
+    const employees = [
+      {
+        id: 1,
+        firstName: "Yibeltal",
+        lastName: "Ayalneh",
+        email: "yibeltal@gmail.com",
+        phone: "0912345678",
+        position: "full stack Developer",
+        departmentId: 101,
+        hireDate: new Date("2022-05-10"),
+        isActive: true,
+      },
+      {
+        id: 2,
+        firstName: "Kefale",
+        lastName: "Asefa",
+        email: "kefale@gmail.com",
+        phone: "0987654321",
+        position: "Backend Developer",
+        departmentId: 102,
+        hireDate: new Date("2023-01-20"),
+        isActive: true,
       },
     ];
 

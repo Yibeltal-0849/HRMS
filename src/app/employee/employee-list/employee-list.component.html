@@ -1,0 +1,39 @@
+<!-- <div class="employee-list-container">
+  <mat-card *ngFor="let emp of employees" class="employee-card">
+    <mat-card-title>{{ emp.firstName }} {{ emp.lastName }}</mat-card-title>
+    <mat-card-subtitle>{{ emp.position }}</mat-card-subtitle>
+    <p>Email: {{ emp.email }}</p>
+    <p>Phone: {{ emp.phone }}</p>
+    <button mat-icon-button color="primary" (click)="editEmployee(emp.id)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="deleteEmployee(emp.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card>
+</div> -->
+
+<div class="employee-list-container">
+  <mat-card *ngFor="let emp of employees" class="employee-card">
+    <mat-card-title>{{ emp.firstName }} {{ emp.lastName }}</mat-card-title>
+    <mat-card-subtitle>{{ emp.position }}</mat-card-subtitle>
+    <p>Email: {{ emp.email }}</p>
+    <p>Phone: {{ emp.phone }}</p>
+    <p>Department ID: {{ emp.departmentId }}</p>
+    <p>Hire Date: {{ emp.hireDate | date }}</p>
+    <p>
+      Status:
+      <span [ngClass]="emp.isActive ? 'active' : 'inactive'">{{
+        emp.isActive ? "Active" : "Inactive"
+      }}</span>
+    </p>
+    <div class="action-buttons">
+      <button mat-icon-button color="primary" (click)="editEmployee(emp.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteEmployee(emp.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>
