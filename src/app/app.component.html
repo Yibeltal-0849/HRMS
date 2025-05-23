@@ -7,7 +7,20 @@
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active"
         >Dashboard</a
       >
-
+      <!-- company section -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Company</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-action-list>
+          <a mat-list-item routerLink="/company/list" routerLinkActive="active"
+            >Company List</a
+          >
+          <a mat-list-item routerLink="/company/add" routerLinkActive="active">
+            Add Company
+          </a>
+        </mat-action-list>
+      </mat-expansion-panel>
       <!-- Users Section -->
       <mat-expansion-panel>
         <mat-expansion-panel-header>

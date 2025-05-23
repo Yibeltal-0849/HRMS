@@ -2,13 +2,46 @@ import { InMemoryDbService } from "angular-in-memory-web-api";
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
+    const company = [
+      {
+        id: 1,
+        name: "Tech Solutions Inc.",
+        description: "Leading technology consulting firm",
+        industry: "Information Technology",
+        location: "San Francisco, CA",
+        email: "info@techsolutions.com",
+        phone: "+1 (415) 555-1234",
+        website: "https://techsolutions.com",
+        establishedDate: new Date("2010-05-15"),
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 2,
+        name: "Green Energy Corp",
+        description: "Renewable energy solutions provider",
+        industry: "Energy",
+        location: "Austin, TX",
+        email: "contact@greenenergy.com",
+        phone: "+1 (512) 555-5678",
+        website: "https://greenenergy.com",
+        establishedDate: new Date("2015-08-20"),
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ];
+
     const users = [
       {
         id: 1,
-        username: "admin",
-        email: "admin@example.com",
-        role: "admin",
+        username: "sara_t",
+        email: "sara@technova.com",
+        role: "manager",
         isActive: true,
+        employeeId: 1,
+        companyId: 1,
       },
       {
         id: 2,
@@ -16,6 +49,8 @@ export class InMemoryDataService implements InMemoryDbService {
         email: "manager@example.com",
         role: "manager",
         isActive: true,
+        employeeId: 2,
+        companyId: 1,
       },
     ];
 
@@ -64,7 +99,7 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     // Add other collections as needed
-    return { users, employees, departments };
+    return { users, employees, departments, company };
   }
 
   // Override genId to ensure entities always have an id

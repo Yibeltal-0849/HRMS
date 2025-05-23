@@ -1,0 +1,37 @@
+.company-form-container {
+  min-width: 400px;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+
+    .form-field {
+      flex: 1;
+    }
+  }
+
+  mat-dialog-actions {
+    padding: 16px 24px;
+    border-top: 1px solid #eee;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 600px) {
+    min-width: 300px;
+
+    .form-row {
+      flex-direction: column;
+      gap: 0;
+
+      .form-field {
+        width: 100%;
+        margin-bottom: 16px;
+      }
+    }
+  }
+}

@@ -27,6 +27,21 @@ import { Employee } from "../models/hrms.model";
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     // Sample data for all your HRMS entities
+
+    const companies = [
+      {
+        id: 1,
+        name: "Tech Innovators Inc.",
+        location: "London, UK",
+        industry: "Software Development",
+        description: "Innovative software and tech solutions.",
+        founded: 2010,
+        website: "https://techinnovators.com",
+        email: "contact@techinnovators.com",
+        phone: "0123456789",
+      },
+    ];
+
     const users = [
       {
         id: 1,
@@ -48,7 +63,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
     ];
 
-    const employees: Employee[] = [
+    const employees = [
       {
         id: 1,
         firstName: "John",
@@ -83,14 +98,17 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const departments = [
-      { id: 1, name: "Human Resources", managerId: 3, location: "Floor 1" },
       {
-        id: 2,
-        name: "Information Technology",
-        managerId: 2,
-        location: "Floor 2",
+        id: 1,
+        name: "Engineering",
+        description: "Handles all tech development",
+        location: "HQ 1st Floor",
+        budget: 1000000,
+        headId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        companyId: 1,
       },
-      { id: 3, name: "Finance", managerId: 4, location: "Floor 3" },
     ];
 
     const jobs = [
@@ -173,6 +191,7 @@ export class InMemoryDataService implements InMemoryDbService {
       leaveRequests,
       salaries,
       performanceReviews,
+      companies,
     };
   }
 

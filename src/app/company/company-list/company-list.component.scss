@@ -1,0 +1,51 @@
+.company-list-container {
+  padding: 20px;
+
+  mat-card {
+    margin: 20px auto;
+    max-width: 1200px;
+
+    mat-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  }
+
+  .loading-shade {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    mat-card {
+      margin: 10px;
+
+      mat-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        button {
+          margin-top: 10px;
+          width: 100%;
+        }
+      }
+    }
+
+    .mat-column-email,
+    .mat-column-industry {
+      display: none;
+    }
+  }
+}

@@ -6,12 +6,44 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class HrmsService {
-  private apiUrl = "api"; // Keep this as 'api' for in-memory web API
+  private apiUrl = "api";
   private httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" }),
   };
 
   constructor(private http: HttpClient) {}
+
+  // Companies
+  getCompanies(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/company`);
+  }
+
+  getCompanyById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/company/${id}`);
+  }
+
+  addCompany(company: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/company`,
+      company,
+      this.httpOptions
+    );
+  }
+
+  updateCompany(company: any): Observable<any> {
+    return this.http.put<any>(
+      `${this.apiUrl}/company/${company.id}`,
+      company,
+      this.httpOptions
+    );
+  }
+
+  deleteCompany(id: number): Observable<any> {
+    return this.http.delete<any>(
+      `${this.apiUrl}/company/${id}`,
+      this.httpOptions
+    );
+  }
 
   // Users
   getUsers(): Observable<any[]> {

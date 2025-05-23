@@ -1,13 +1,40 @@
+export interface Company {
+  id: number;
+  name: string;
+  description?: string;
+  industry?: string;
+  location: string;
+  email?: string;
+  phone?: string;
+  website?: string;
+  establishedDate?: Date;
+  isActive: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+export interface Department {
+  id: number;
+  name: string;
+  description?: string;
+  location?: string;
+  budget?: number;
+  headId?: number; // Employee ID of department head
+  createdAt?: Date;
+  updatedAt?: Date;
+  companyId: number; // 🔗 Reference to Company
+}
+
 export interface User {
   id: number;
   username: string;
   email: string;
-  password?: string; // Optional because we might not want to expose this in all responses
+  password?: string;
   role: "admin" | "manager" | "employee" | "hr";
   isActive: boolean;
   createdAt?: Date;
   updatedAt?: Date;
-  employeeId?: number; // Link to employee profile if applicable
+  employeeId?: number; //employee id
+  companyId?: number; // 🔗  Reference to Company
 }
 
 export interface Employee {
@@ -29,19 +56,9 @@ export interface Employee {
   bankAccountNumber?: string;
   taxId?: string;
   isActive: boolean;
-  userId?: number; // Associated user account
-  managerId?: number; // Reference to another employee
-}
-
-export interface Department {
-  id: number;
-  name: string;
-  description?: string;
-  location?: string;
-  budget?: number;
-  headId?: number; // Employee ID of department head
-  createdAt?: Date;
-  updatedAt?: Date;
+  userId?: number;
+  managerId?: number;
+  companyId: number; // 🔗 Reference to Company
 }
 
 export interface Candidate {

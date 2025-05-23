@@ -1,0 +1,82 @@
+<div class="company-form-container">
+  <h2 mat-dialog-title>
+    {{ data === "add" ? "Add New Company" : "Edit Company" }}
+  </h2>
+
+  <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Company Name</mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error *ngIf="companyForm.get('name').hasError('required')">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Industry</mat-label>
+        <input matInput formControlName="industry" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location" required />
+        <mat-error *ngIf="companyForm.get('location').hasError('required')">
+          Location is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+        <mat-error *ngIf="companyForm.get('email').hasError('email')">
+          Please enter a valid email
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Website</mat-label>
+        <input matInput formControlName="website" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Established Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="establishedDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="2"></textarea>
+      </mat-form-field>
+    </div>
+
+    <mat-checkbox formControlName="isActive">Active Company</mat-checkbox>
+  </form>
+
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+    [disabled]="companyForm.invalid || isSaving"
+  >
+    {{ isSaving ? "Saving..." : "Save" }}
+  </button>
+</div>
