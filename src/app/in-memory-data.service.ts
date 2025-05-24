@@ -113,6 +113,84 @@ export class InMemoryDataService implements InMemoryDbService {
       // ... other employees
     ];
 
+    const jobs = [
+      {
+        id: 1,
+        title: "Frontend Developer",
+        description: "Develop and maintain Angular-based web applications.",
+        departmentId: 1, //come from department ID
+        companyId: 1, //come from company ID
+        requirements: [
+          "3+ years of Angular experience",
+          "Strong HTML/CSS skills",
+          "Knowledge of REST APIs",
+        ],
+        responsibilities: [
+          "Develop UI components",
+          "Collaborate with backend team",
+          "Ensure responsive design",
+        ],
+        location: "Addis Ababa",
+        type: "full-time",
+        salaryRangeMin: 1200,
+        salaryRangeMax: 2000,
+        isRemote: false,
+        experienceLevel: "mid",
+        educationLevel: "bachelor",
+        postedDate: new Date("2025-05-20"),
+        closingDate: new Date("2025-06-20"),
+        isActive: true,
+      },
+      {
+        id: 2,
+        title: "Data Analyst Intern",
+        description: "Support the data team by analyzing reports and trends.",
+        departmentId: 2, //come from department ID
+        companyId: 1, //come from company ID
+        requirements: [
+          "Basic understanding of data analysis",
+          "Familiarity with Excel and SQL",
+        ],
+        responsibilities: [
+          "Prepare weekly reports",
+          "Assist in data cleaning",
+          "Work under senior analysts",
+        ],
+        location: "Remote",
+        type: "internship",
+        isRemote: true,
+        experienceLevel: "entry",
+        postedDate: new Date("2025-05-21"),
+        isActive: true,
+      },
+      {
+        id: 3,
+        title: "HR Executive",
+        description: "Manage employee records and recruitment processes.",
+        departmentId: 2, //come from department ID
+        companyId: 2, //come from company ID
+        requirements: [
+          "5+ years in HR management",
+          "Good communication skills",
+        ],
+        responsibilities: [
+          "Oversee hiring",
+          "Manage payroll records",
+          "Develop HR policies",
+        ],
+        location: "Bahir Dar",
+        type: "full-time",
+        salaryRangeMin: 1500,
+        salaryRangeMax: 2500,
+        isRemote: false,
+        experienceLevel: "senior",
+        educationLevel: "master",
+        postedDate: new Date("2025-05-22"),
+        closingDate: new Date("2025-06-15"),
+        isActive: false,
+      },
+    ];
+
     const salaries = [
       {
         id: 1,
@@ -151,7 +229,8 @@ export class InMemoryDataService implements InMemoryDbService {
       employees,
       departments,
       company,
-      salaries, // Added salaries collection
+      salaries,
+      jobs,
     };
   }
 

@@ -1,0 +1,146 @@
+<div class="job-form">
+  <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-title>Job Form</mat-card-title>
+      <mat-card-content>
+        <!-- Title -->
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <!-- Department -->
+        <mat-form-field appearance="fill">
+          <mat-label>Department</mat-label>
+          <mat-select formControlName="departmentId">
+            <mat-option *ngFor="let dept of departments" [value]="dept.id">
+              {{ dept.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Company -->
+        <mat-form-field appearance="fill">
+          <mat-label>Company</mat-label>
+          <mat-select formControlName="companyId">
+            <mat-option *ngFor="let comp of companies" [value]="comp.id">
+              {{ comp.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Requirements -->
+        <mat-form-field appearance="fill">
+          <mat-label>Requirements (comma separated)</mat-label>
+          <input matInput formControlName="requirements" />
+        </mat-form-field>
+
+        <!-- Responsibilities -->
+        <mat-form-field appearance="fill">
+          <mat-label>Responsibilities (comma separated)</mat-label>
+          <input matInput formControlName="responsibilities" />
+        </mat-form-field>
+
+        <!-- Location -->
+        <mat-form-field appearance="fill">
+          <mat-label>Location</mat-label>
+          <input matInput formControlName="location" />
+        </mat-form-field>
+
+        <!-- Type -->
+        <mat-form-field appearance="fill">
+          <mat-label>Job Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="full-time">Full Time</mat-option>
+            <mat-option value="part-time">Part Time</mat-option>
+            <mat-option value="contract">Contract</mat-option>
+            <mat-option value="temporary">Temporary</mat-option>
+            <mat-option value="internship">Internship</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Salary Range -->
+        <mat-form-field appearance="fill">
+          <mat-label>Salary Min</mat-label>
+          <input type="number" matInput formControlName="salaryRangeMin" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Salary Max</mat-label>
+          <input type="number" matInput formControlName="salaryRangeMax" />
+        </mat-form-field>
+
+        <!-- Is Remote -->
+        <mat-checkbox formControlName="isRemote">Remote</mat-checkbox>
+
+        <!-- Experience Level -->
+        <mat-form-field appearance="fill">
+          <mat-label>Experience Level</mat-label>
+          <mat-select formControlName="experienceLevel">
+            <mat-option value="entry">Entry</mat-option>
+            <mat-option value="mid">Mid</mat-option>
+            <mat-option value="senior">Senior</mat-option>
+            <mat-option value="executive">Executive</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Education Level -->
+        <mat-form-field appearance="fill">
+          <mat-label>Education Level</mat-label>
+          <mat-select formControlName="educationLevel">
+            <mat-option value="high-school">High School</mat-option>
+            <mat-option value="bachelor">Bachelor</mat-option>
+            <mat-option value="master">Master</mat-option>
+            <mat-option value="phd">PhD</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Posted Date -->
+        <mat-form-field appearance="fill">
+          <mat-label>Posted Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="postedPicker"
+            formControlName="postedDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="postedPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #postedPicker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Closing Date -->
+        <mat-form-field appearance="fill">
+          <mat-label>Closing Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="closingPicker"
+            formControlName="closingDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="closingPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #closingPicker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Is Active -->
+        <mat-checkbox formControlName="isActive">Is Active</mat-checkbox>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Save</button>
+        <button mat-button color="warn" type="button" (click)="onCancel()">
+          Cancel
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

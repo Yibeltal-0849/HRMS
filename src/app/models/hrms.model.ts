@@ -86,6 +86,7 @@ export interface Job {
   title: string;
   description: string;
   departmentId: number;
+  companyId: number;
   requirements: string[];
   responsibilities: string[];
   location: string;
@@ -98,7 +99,6 @@ export interface Job {
   postedDate: Date;
   closingDate?: Date;
   isActive: boolean;
-  hiringManagerId?: number;
 }
 
 export interface JobApplication {

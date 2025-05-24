@@ -145,6 +145,37 @@ export class HrmsService {
       .pipe(catchError(this.handleError<any>("deleteDepartment")));
   }
 
+  // ========================= Jobs =========================
+  getJobs(): Observable<any[]> {
+    return this.http
+      .get<any[]>(`${this.apiUrl}/jobs`)
+      .pipe(catchError(this.handleError<any[]>("getJobs", [])));
+  }
+
+  getJob(id: number): Observable<any> {
+    return this.http
+      .get<any>(`${this.apiUrl}/jobs/${id}`)
+      .pipe(catchError(this.handleError<any>("getJob")));
+  }
+
+  addJob(job: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.apiUrl}/jobs`, job, this.httpOptions)
+      .pipe(catchError(this.handleError<any>("addJob")));
+  }
+
+  updateJob(job: any): Observable<any> {
+    return this.http
+      .put<any>(`${this.apiUrl}/jobs/${job.id}`, job, this.httpOptions)
+      .pipe(catchError(this.handleError<any>("updateJob")));
+  }
+
+  deleteJob(id: number): Observable<any> {
+    return this.http
+      .delete<any>(`${this.apiUrl}/jobs/${id}`, this.httpOptions)
+      .pipe(catchError(this.handleError<any>("deleteJob")));
+  }
+
   // ... (Rest of the existing methods: candidates, jobs, attendance, salary, leave requests, etc.)
 
   // ========== Salary ==========

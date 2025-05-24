@@ -1,0 +1,17 @@
+<div class="job-list">
+  <mat-card *ngFor="let job of jobs" class="job-card">
+    <mat-card-title>{{ job.title }}</mat-card-title>
+    <mat-card-subtitle>{{ job.location }} | {{ job.type }}</mat-card-subtitle>
+    <mat-card-content>
+      <p>{{ job.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button color="primary" (click)="editJob(job.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onDeleteJob(job.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

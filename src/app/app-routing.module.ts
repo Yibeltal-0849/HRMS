@@ -74,6 +74,14 @@ const routes: Routes = [
       import("./salary/salary.module").then((m) => m.SalaryModule),
   },
   // { path: "", redirectTo: "/salaries/list", pathMatch: "full" },
+
+  //for job
+
+  {
+    path: "jobs",
+    loadChildren: () => import("./job/job.module").then((m) => m.JobModule),
+  },
+  // { path: "", redirectTo: "/jobs/list", pathMatch: "full" },
 ];
 
 @NgModule({

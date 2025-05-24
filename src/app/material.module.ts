@@ -30,7 +30,6 @@ import {
 } from "@angular/material";
 
 //salary
-
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 @NgModule({
