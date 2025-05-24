@@ -12,6 +12,7 @@ export class DepartmentFormComponent implements OnInit {
   departmentForm: FormGroup;
   isEdit = false;
   id: number;
+  successMessage = "";
 
   constructor(
     private fb: FormBuilder,
@@ -20,31 +21,13 @@ export class DepartmentFormComponent implements OnInit {
     private hrmsService: HrmsService
   ) {}
 
-  // ngOnInit() {
-  //   this.departmentForm = this.fb.group({
-  //     name: ["", Validators.required],
-  //     description: [""],
-  //     location: [""],
-  //     budget: ["", [Validators.min(0)]],
-  //     headId: [""],
-  //   });
-
-  //   this.id = +this.route.snapshot.paramMap.get("id");
-  //   if (this.id) {
-  //     this.isEdit = true;
-  //     this.hrmsService.getDepartments().subscribe((depts) => {
-  //       const dept = depts.find((d) => d.id === this.id);
-  //       if (dept) this.departmentForm.patchValue(dept);
-  //     });
-  //   }
-  // }
   ngOnInit() {
     this.departmentForm = this.fb.group({
       name: ["", Validators.required],
+      companyId: ["", Validators.required],
       description: [""],
       location: [""],
       budget: ["", [Validators.min(0)]],
-      headId: [""],
     });
 
     const idParam = this.route.snapshot.paramMap.get("id");
@@ -65,11 +48,24 @@ export class DepartmentFormComponent implements OnInit {
 
   onSubmit() {
     if (this.departmentForm.invalid) return;
+
     const dept = { ...this.departmentForm.value, id: this.id };
     const request = this.isEdit
       ? this.hrmsService.updateDepartment(dept)
       : this.hrmsService.addDepartment(dept);
 
-    request.subscribe(() => this.router.navigate(["/departments/list"]));
+    request.subscribe(() => {
+      if (this.isEdit) {
+        this.successMessage = "✅ Department updated successfully!";
+        // Optionally reset form or scroll to top
+      } else {
+        this.successMessage = "✅ Department created successfully!";
+        this.departmentForm.reset();
+      }
+
+      setTimeout(() => {
+        this.successMessage = "";
+      }, 3000);
+    });
   }
 }

@@ -1,42 +1,118 @@
-<form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="full-width">
-    <input matInput placeholder="Name" formControlName="name" required />
-    <mat-error *ngIf="departmentForm.get('name').invalid"
-      >Name is required</mat-error
-    >
-  </mat-form-field>
+<div class="department-form-container">
+  <h2 class="text-xl font-semibold mb-4">
+    {{ isEdit ? "Edit Department" : "Add New Department" }}
+  </h2>
 
-  <mat-form-field class="full-width">
-    <textarea
-      matInput
-      placeholder="Description"
-      formControlName="description"
-    ></textarea>
-  </mat-form-field>
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success mb-4">
+    {{ successMessage }}
+  </div>
 
-  <mat-form-field class="full-width">
-    <input matInput placeholder="Location" formControlName="location" />
-  </mat-form-field>
+  <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+    <!-- Department Name -->
+    <div class="form-group mb-3">
+      <label for="name">Department Name</label>
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        [ngClass]="{
+          'is-invalid':
+            departmentForm.get('name').invalid &&
+            departmentForm.get('name').touched
+        }"
+      />
+      <div
+        *ngIf="
+          departmentForm.get('name').invalid &&
+          departmentForm.get('name').touched
+        "
+        class="invalid-feedback"
+      >
+        Department name is required.
+      </div>
+    </div>
 
-  <mat-form-field class="full-width">
-    <input
-      matInput
-      placeholder="Budget"
-      formControlName="budget"
-      type="number"
-    />
-  </mat-form-field>
+    <!-- Company ID -->
+    <div class="form-group mb-3">
+      <label for="companyId">Company ID</label>
+      <input
+        id="companyId"
+        type="number"
+        class="form-control"
+        formControlName="companyId"
+        [ngClass]="{
+          'is-invalid':
+            departmentForm.get('companyId').invalid &&
+            departmentForm.get('companyId').touched
+        }"
+      />
+      <div
+        *ngIf="
+          departmentForm.get('companyId').invalid &&
+          departmentForm.get('companyId').touched
+        "
+        class="invalid-feedback"
+      >
+        Company ID is required.
+      </div>
+    </div>
 
-  <mat-form-field class="full-width">
-    <input
-      matInput
-      placeholder="Head ID (Employee)"
-      formControlName="headId"
-      type="number"
-    />
-  </mat-form-field>
+    <!-- Location -->
+    <div class="form-group mb-3">
+      <label for="location">Location</label>
+      <input
+        id="location"
+        type="text"
+        class="form-control"
+        formControlName="location"
+      />
+    </div>
 
-  <button mat-raised-button color="primary" type="submit">
-    {{ isEdit ? "Update" : "Create" }} Department
-  </button>
-</form>
+    <!-- Budget -->
+    <div class="form-group mb-4">
+      <label for="budget">Budget</label>
+      <input
+        id="budget"
+        type="number"
+        class="form-control"
+        formControlName="budget"
+        [ngClass]="{
+          'is-invalid':
+            departmentForm.get('budget').invalid &&
+            departmentForm.get('budget').touched
+        }"
+      />
+      <div
+        *ngIf="
+          departmentForm.get('budget').hasError('min') &&
+          departmentForm.get('budget').touched
+        "
+        class="invalid-feedback"
+      >
+        Budget must be 0 or more.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+
+    <div class="form-buttons">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="departmentForm.invalid"
+      >
+        {{ isEdit ? "Update Department" : "Add Department" }}
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="router.navigate(['/departments/list'])"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,10 +1,57 @@
-.department-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+.department-table-container {
+  padding: 1rem;
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+      color: #333;
+    }
+
+    td {
+      color: #444;
+    }
+
+    mat-icon {
+      font-size: 20px;
+    }
+
+    button[mat-icon-button] {
+      margin-right: 4px;
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
 }
 
-.department-card {
-  width: 300px;
+/* Responsive enhancements */
+@media (max-width: 768px) {
+  .department-table-container {
+    table {
+      th,
+      td {
+        padding: 0.5rem 0.75rem;
+        font-size: 14px;
+      }
+
+      mat-icon {
+        font-size: 18px;
+      }
+    }
+  }
 }
