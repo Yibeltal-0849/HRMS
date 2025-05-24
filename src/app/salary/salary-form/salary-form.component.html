@@ -1,0 +1,165 @@
+<div class="salary-form-container">
+  <h2>{{ isEditMode ? "Edit" : "Add" }} Salary Record</h2>
+
+  <form [formGroup]="salaryForm" (ngSubmit)="onSubmit()" class="salary-form">
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Employee</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="employeeId"
+          [matAutocomplete]="auto"
+          required
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          [displayWith]="displayEmployee"
+        >
+          <mat-option
+            *ngFor="let employee of filteredEmployees | async"
+            [value]="employee.id"
+          >
+            {{ employee.firstName }} {{ employee.lastName }} (ID:
+            {{ employee.id }})
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="salaryForm.get('employeeId')?.hasError('required')">
+          Employee is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Base Salary</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="baseSalary"
+          required
+          min="0"
+        />
+        <span matPrefix>$&nbsp;</span>
+        <mat-error *ngIf="salaryForm.get('baseSalary')?.hasError('required')">
+          Base salary is required
+        </mat-error>
+        <mat-error *ngIf="salaryForm.get('baseSalary')?.hasError('min')">
+          Must be positive
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Bonus</mat-label>
+        <input matInput type="number" formControlName="bonus" min="0" />
+        <span matPrefix>$&nbsp;</span>
+        <mat-error *ngIf="salaryForm.get('bonus')?.hasError('min')">
+          Must be positive
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Allowances</mat-label>
+        <input matInput type="number" formControlName="allowances" min="0" />
+        <span matPrefix>$&nbsp;</span>
+        <mat-error *ngIf="salaryForm.get('allowances')?.hasError('min')">
+          Must be positive
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Deductions</mat-label>
+        <input matInput type="number" formControlName="deductions" min="0" />
+        <span matPrefix>$&nbsp;</span>
+        <mat-error *ngIf="salaryForm.get('deductions')?.hasError('min')">
+          Must be positive
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Tax</mat-label>
+        <input matInput type="number" formControlName="tax" min="0" />
+        <span matPrefix>$&nbsp;</span>
+        <mat-error *ngIf="salaryForm.get('tax')?.hasError('min')">
+          Must be positive
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Payment Frequency</mat-label>
+        <mat-select formControlName="paymentFrequency" required>
+          <mat-option
+            *ngFor="let freq of paymentFrequencies"
+            [value]="freq.value"
+          >
+            {{ freq.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="salaryForm.get('paymentFrequency')?.hasError('required')"
+        >
+          Payment frequency is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Effective Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="effectiveDate"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error
+          *ngIf="salaryForm.get('effectiveDate')?.hasError('required')"
+        >
+          Effective date is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Bank Account Number</mat-label>
+        <input matInput formControlName="bankAccountNumber" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Bank Name</mat-label>
+        <input matInput formControlName="bankName" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Notes</mat-label>
+        <textarea matInput formControlName="notes" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button type="button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="salaryForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Update" : "Save" }}
+        <mat-icon *ngIf="isLoading">
+          <mat-spinner diameter="20"></mat-spinner>
+        </mat-icon>
+      </button>
+    </div>
+  </form>
+</div>

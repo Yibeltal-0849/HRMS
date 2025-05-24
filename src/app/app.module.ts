@@ -1,6 +1,3 @@
-import { MatSelectModule } from "@angular/material/select";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { MatCheckboxModule } from "@angular/material/checkbox";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
@@ -12,6 +9,7 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { MaterialModule } from "./material.module";
+import { HrmsService } from "./services/hrms.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,17 +21,15 @@ import { MaterialModule } from "./material.module";
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      delay: 500,
       apiBase: "api/",
+      delay: 500,
       dataEncapsulation: false,
+      passThruUnknownUrl: true, // New in 0.11.0
     }),
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule,
-    MatExpansionModule,
-    MatCheckboxModule,
   ],
-  providers: [],
+  providers: [HrmsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

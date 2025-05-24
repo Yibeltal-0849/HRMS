@@ -1,0 +1,50 @@
+.salary-list-container {
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .search-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  mat-table {
+    width: 100%;
+    min-width: 800px;
+  }
+
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+  }
+
+  @media (max-width: 600px) {
+    .header-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}

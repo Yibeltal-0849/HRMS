@@ -1,0 +1,131 @@
+<div class="salary-list-container">
+  <div class="header-actions">
+    <h2>Salary Records</h2>
+    <button mat-raised-button color="primary" (click)="addNewSalary()">
+      <mat-icon>add</mat-icon> Add New Salary
+    </button>
+  </div>
+
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Filter salaries"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" matSort>
+      <!-- Employee ID Column -->
+      <ng-container matColumnDef="employeeId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Employee ID</mat-header-cell
+        >
+        <mat-cell *matCellDef="let salary">{{ salary.employeeId }}</mat-cell>
+      </ng-container>
+
+      <!-- Base Salary Column -->
+      <ng-container matColumnDef="baseSalary">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Base Salary</mat-header-cell
+        >
+        <mat-cell *matCellDef="let salary">{{
+          salary.baseSalary | currency
+        }}</mat-cell>
+      </ng-container>
+
+      <!-- Bonus Column -->
+      <ng-container matColumnDef="bonus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Bonus</mat-header-cell
+        >
+        <mat-cell *matCellDef="let salary">{{
+          salary.bonus | currency
+        }}</mat-cell>
+      </ng-container>
+
+      <!-- Allowances Column -->
+      <ng-container matColumnDef="allowances">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Allowances</mat-header-cell
+        >
+        <mat-cell *matCellDef="let salary">{{
+          salary.allowances | currency
+        }}</mat-cell>
+      </ng-container>
+
+      <!-- Deductions Column -->
+      <ng-container matColumnDef="deductions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Deductions</mat-header-cell
+        >
+        <mat-cell *matCellDef="let salary">{{
+          salary.deductions | currency
+        }}</mat-cell>
+      </ng-container>
+
+      <!-- Tax Column -->
+      <ng-container matColumnDef="tax">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Tax</mat-header-cell>
+        <mat-cell *matCellDef="let salary">{{
+          salary.tax | currency
+        }}</mat-cell>
+      </ng-container>
+
+      <!-- Effective Date Column -->
+      <ng-container matColumnDef="effectiveDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Effective Date</mat-header-cell
+        >
+        <mat-cell *matCellDef="let salary">{{
+          salary.effectiveDate | date
+        }}</mat-cell>
+      </ng-container>
+
+      <!-- Payment Frequency Column -->
+      <ng-container matColumnDef="paymentFrequency">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Payment Frequency</mat-header-cell
+        >
+        <mat-cell *matCellDef="let salary">{{
+          salary.paymentFrequency
+        }}</mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let salary">
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="editSalary(salary.id)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="deleteSalary(salary.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</div>

@@ -29,6 +29,10 @@ import {
   MatChipsModule,
 } from "@angular/material";
 
+//salary
+
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+
 @NgModule({
   imports: [
     MatChipsModule,
@@ -51,6 +55,7 @@ import {
     MatToolbarModule,
   ],
   exports: [
+    MatAutocompleteModule,
     MatChipsModule,
     MatSortModule,
     MatPaginatorModule,
