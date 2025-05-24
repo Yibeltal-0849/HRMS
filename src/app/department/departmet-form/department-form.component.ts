@@ -13,11 +13,12 @@ export class DepartmentFormComponent implements OnInit {
   isEdit = false;
   id: number;
   successMessage = "";
+  companies: any[] = []; // 💡 Holds list of companies for dropdown
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     private hrmsService: HrmsService
   ) {}
 
@@ -28,6 +29,11 @@ export class DepartmentFormComponent implements OnInit {
       description: [""],
       location: [""],
       budget: ["", [Validators.min(0)]],
+    });
+
+    // 👇 Load all companies for dropdown
+    this.hrmsService.getCompanies().subscribe((data) => {
+      this.companies = data;
     });
 
     const idParam = this.route.snapshot.paramMap.get("id");
@@ -55,13 +61,11 @@ export class DepartmentFormComponent implements OnInit {
       : this.hrmsService.addDepartment(dept);
 
     request.subscribe(() => {
-      if (this.isEdit) {
-        this.successMessage = "✅ Department updated successfully!";
-        // Optionally reset form or scroll to top
-      } else {
-        this.successMessage = "✅ Department created successfully!";
-        this.departmentForm.reset();
-      }
+      this.successMessage = this.isEdit
+        ? "✅ Department updated successfully!"
+        : "✅ Department created successfully!";
+
+      if (!this.isEdit) this.departmentForm.reset();
 
       setTimeout(() => {
         this.successMessage = "";

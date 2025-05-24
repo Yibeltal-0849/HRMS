@@ -17,6 +17,35 @@ export class InMemoryDataService implements InMemoryDbService {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+
+      {
+        id: 2,
+        name: "Innovative Tech Group",
+        description: "Provider of innovative tech solutions",
+        industry: "Information Technology",
+        location: "New York, NY",
+        email: "contact@innovativetech.com",
+        phone: "+1 (212) 555-5678",
+        website: "https://innovativetech.com",
+        establishedDate: new Date("2015-08-20"),
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 3,
+        name: "Future Tech Solutions",
+        description: "Expert in future technology consulting",
+        industry: "Information Technology",
+        location: "Austin, TX",
+        email: "hello@futuretech.com",
+        phone: "+1 (512) 555-9101",
+        website: "https://futuretech.com",
+        establishedDate: new Date("2018-11-30"),
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
       // ... other companies
     ];
 
@@ -40,7 +69,15 @@ export class InMemoryDataService implements InMemoryDbService {
         description: "Human Resources",
         location: "1st Floor",
         budget: 50000,
-        headId: 101,
+        companyId: 1, //from company id
+      },
+      {
+        id: 2,
+        name: "SW",
+        description: "Develop Software",
+        location: "2nd Floor",
+        budget: 600000,
+
         companyId: 1,
       },
       // ... other departments

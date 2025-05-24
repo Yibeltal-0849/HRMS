@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HrmsService } from "../../services/hrms.service";
 import { Company } from "../../models/hrms.model";
@@ -12,147 +11,87 @@ import { Company } from "../../models/hrms.model";
 })
 export class CompanyFormComponent implements OnInit {
   companyForm: FormGroup;
+  isEditMode = false;
   isSaving = false;
-  today = new Date();
-  mode: "add" | "edit" = "add";
-  companyId?: number;
+  companyId: number;
 
   constructor(
     private fb: FormBuilder,
-    private hrmsService: HrmsService,
-    private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
     private router: Router,
-    private route: ActivatedRoute
+    private companyService: HrmsService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+
+    // Check if it's edit mode based on the route
     this.route.paramMap.subscribe((params) => {
       const id = params.get("id");
       if (id) {
-        this.mode = "edit";
+        this.isEditMode = true;
         this.companyId = +id;
-        this.hrmsService.getCompanyById(this.companyId).subscribe((company) => {
-          if (company) {
-            this.patchForm(company);
-          } else {
-            this.snackBar.open("Company not found", "Close", {
-              duration: 3000,
-              panelClass: "error-snackbar",
-            });
-            this.router.navigate(["/company"]);
-          }
-        });
+        this.loadCompany(this.companyId);
       }
     });
   }
 
   initForm(): void {
     this.companyForm = this.fb.group({
-      name: ["", [Validators.required, Validators.maxLength(100)]],
-      description: ["", Validators.maxLength(500)],
-      industry: ["", Validators.maxLength(50)],
-      location: ["", [Validators.required, Validators.maxLength(100)]],
-      email: ["", [Validators.email, Validators.maxLength(100)]],
-      phone: ["", [Validators.pattern(/^[0-9\+\-\s]+$/)]],
-      website: [
-        "",
-        Validators.pattern(
-          /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
-        ),
-      ],
-      establishedDate: [null],
-      isActive: [true],
+      id: [null], // include if you're editing
+      name: ["", Validators.required],
+      industry: [""],
+      location: ["", Validators.required],
+      email: ["", Validators.email],
+      phone: [""],
+      website: [""],
+      establishedDate: [""],
+      description: [""],
+      isActive: [false],
     });
   }
 
-  patchForm(company: Company): void {
-    this.companyForm.patchValue({
-      name: company.name,
-      description: company.description,
-      industry: company.industry,
-      location: company.location,
-      email: company.email,
-      phone: company.phone,
-      website: company.website,
-      establishedDate: company.establishedDate
-        ? new Date(company.establishedDate)
-        : null,
-      isActive: company.isActive,
+  loadCompany(id: number): void {
+    this.companyService.getCompanyById(id).subscribe({
+      next: (company: Company) => this.companyForm.patchValue(company),
+      error: (err) => console.error("Failed to load company:", err),
     });
   }
 
   onSubmit(): void {
-    if (this.companyForm.invalid) {
-      this.markFormGroupTouched(this.companyForm);
-      return;
-    }
+    if (this.companyForm.invalid) return;
 
     this.isSaving = true;
-    const companyData = this.companyForm.value;
+    const formData = this.companyForm.value;
 
-    const operation$ =
-      this.mode === "add"
-        ? this.hrmsService.addCompany(companyData)
-        : this.hrmsService.updateCompany({
-            ...companyData,
-            id: this.companyId,
-          });
-
-    operation$.subscribe({
-      next: () => {
-        this.snackBar.open(
-          `Company ${this.mode === "add" ? "added" : "updated"} successfully`,
-          "Close",
-          { duration: 3000, panelClass: "success-snackbar" }
-        );
-        this.router.navigate(["/company"]);
-      },
-      error: (error) => {
-        this.snackBar.open(
-          `Error ${this.mode === "add" ? "adding" : "updating"} company: ${
-            error.message || "Unknown error"
-          }`,
-          "Close",
-          { duration: 5000, panelClass: "error-snackbar" }
-        );
-        this.isSaving = false;
-      },
-    });
+    if (this.isEditMode) {
+      // Update
+      this.companyService.updateCompany(formData).subscribe({
+        next: () => {
+          this.isSaving = false;
+          this.router.navigate(["/company/list"]); // ✅ Redirect after update
+        },
+        error: (err) => {
+          console.error("Update failed:", err);
+          this.isSaving = false;
+        },
+      });
+    } else {
+      // Add
+      this.companyService.addCompany(formData).subscribe({
+        next: () => {
+          this.isSaving = false;
+          this.router.navigate(["/company/list"]); // ✅ Redirect after add
+        },
+        error: (err) => {
+          console.error("Add failed:", err);
+          this.isSaving = false;
+        },
+      });
+    }
   }
 
   onCancel(): void {
-    if (
-      this.companyForm.dirty &&
-      !confirm("You have unsaved changes. Are you sure you want to cancel?")
-    ) {
-      return;
-    }
-    this.router.navigate(["/company"]);
-  }
-
-  private markFormGroupTouched(formGroup: FormGroup): void {
-    Object.values(formGroup.controls).forEach((control) => {
-      control.markAsTouched();
-      if (control instanceof FormGroup) {
-        this.markFormGroupTouched(control);
-      }
-    });
-  }
-
-  get name() {
-    return this.companyForm.get("name");
-  }
-  get location() {
-    return this.companyForm.get("location");
-  }
-  get email() {
-    return this.companyForm.get("email");
-  }
-  get phone() {
-    return this.companyForm.get("phone");
-  }
-  get website() {
-    return this.companyForm.get("website");
+    this.router.navigate(["/company/list"]); // Optional: Cancel button routing
   }
 }

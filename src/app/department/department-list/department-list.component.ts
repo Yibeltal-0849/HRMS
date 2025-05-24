@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class DepartmentListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
+    "id",
     "name",
     "companyId",
     "budget",

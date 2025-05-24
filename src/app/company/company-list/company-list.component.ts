@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 export class CompanyListComponent implements OnInit {
   companies: any[] = [];
   displayedColumns: string[] = [
+    "id",
     "name",
     "industry",
     "location",

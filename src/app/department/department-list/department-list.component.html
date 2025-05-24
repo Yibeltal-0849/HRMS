@@ -10,6 +10,12 @@
     class="mat-elevation-z8"
     style="width: 100%"
   >
+    <!-- Dept ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Dept ID</th>
+      <td mat-cell *matCellDef="let dept">{{ dept.id }}</td>
+    </ng-container>
+
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Dept Name</th>

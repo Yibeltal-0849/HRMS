@@ -34,12 +34,11 @@
       </div>
     </div>
 
-    <!-- Company ID -->
+    <!-- Company Selection -->
     <div class="form-group mb-3">
-      <label for="companyId">Company ID</label>
-      <input
+      <label for="companyId">Company</label>
+      <select
         id="companyId"
-        type="number"
         class="form-control"
         formControlName="companyId"
         [ngClass]="{
@@ -47,7 +46,12 @@
             departmentForm.get('companyId').invalid &&
             departmentForm.get('companyId').touched
         }"
-      />
+      >
+        <option value="">-- Select Company --</option>
+        <option *ngFor="let company of companies" [value]="company.id">
+          {{ company.name }}
+        </option>
+      </select>
       <div
         *ngIf="
           departmentForm.get('companyId').invalid &&
@@ -55,7 +59,7 @@
         "
         class="invalid-feedback"
       >
-        Company ID is required.
+        Company is required.
       </div>
     </div>
 
@@ -96,7 +100,6 @@
     </div>
 
     <!-- Submit Button -->
-
     <div class="form-buttons">
       <button
         type="submit"
