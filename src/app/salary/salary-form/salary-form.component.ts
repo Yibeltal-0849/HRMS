@@ -3,10 +3,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HrmsService } from "../../services/hrms.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Salary } from "../../models/hrms.model";
+import { Salary, Employee } from "../../models/hrms.model";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
-import { Employee } from "../../models/hrms.model";
 
 @Component({
   selector: "app-salary-form",
@@ -36,7 +35,7 @@ export class SalaryFormComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.salaryForm = this.fb.group({
-      employeeId: ["", Validators.required],
+      employeeId: [null, Validators.required], // Now holds full Employee object
       baseSalary: ["", [Validators.required, Validators.min(0)]],
       bonus: ["", Validators.min(0)],
       allowances: ["", Validators.min(0)],
@@ -65,22 +64,22 @@ export class SalaryFormComponent implements OnInit {
       .get("employeeId")!
       .valueChanges.pipe(
         startWith(""),
-        map((value) => this._filterEmployees(value))
+        map((value) =>
+          typeof value === "string"
+            ? this._filterEmployees(value)
+            : this.employees
+        )
       );
   }
 
-  private _filterEmployees(value: string | number): Employee[] {
-    if (typeof value === "string") {
-      const filterValue = value.toLowerCase();
-      return this.employees.filter(
-        (employee) =>
-          employee.firstName.toLowerCase().includes(filterValue) ||
-          employee.lastName.toLowerCase().includes(filterValue) ||
-          employee.id.toString().includes(filterValue)
-      );
-    } else {
-      return this.employees;
-    }
+  private _filterEmployees(value: string): Employee[] {
+    const filterValue = value.toLowerCase();
+    return this.employees.filter(
+      (employee) =>
+        employee.firstName.toLowerCase().includes(filterValue) ||
+        employee.lastName.toLowerCase().includes(filterValue) ||
+        employee.id.toString().includes(filterValue)
+    );
   }
 
   displayEmployee(employee?: Employee): string {
@@ -99,8 +98,12 @@ export class SalaryFormComponent implements OnInit {
     this.isLoading = true;
     this.hrmsService.getSalaryById(id).subscribe({
       next: (salary) => {
+        const employeeObj = this.employees.find(
+          (e) => e.id === salary.employeeId
+        );
         this.salaryForm.patchValue({
           ...salary,
+          employeeId: employeeObj || null,
           effectiveDate: new Date(salary.effectiveDate),
         });
         this.isLoading = false;
@@ -120,7 +123,12 @@ export class SalaryFormComponent implements OnInit {
     }
 
     this.isLoading = true;
-    const salaryData: Salary = this.salaryForm.value;
+
+    const formValue = this.salaryForm.value;
+    const salaryData: Salary = {
+      ...formValue,
+      employeeId: formValue.employeeId.id, // extract employee ID
+    };
 
     const operation = this.isEditMode
       ? this.hrmsService.updateSalary({ ...salaryData, id: this.salaryId! })

@@ -4,29 +4,24 @@
   <form [formGroup]="salaryForm" (ngSubmit)="onSubmit()" class="salary-form">
     <div class="form-row">
       <mat-form-field appearance="outline">
-        <mat-label>Employee</mat-label>
         <input
           type="text"
+          placeholder="Select Employee"
           matInput
-          formControlName="employeeId"
+          [formControl]="salaryForm.get('employeeId')"
           [matAutocomplete]="auto"
-          required
         />
         <mat-autocomplete
           #auto="matAutocomplete"
-          [displayWith]="displayEmployee"
+          [displayWith]="displayEmployee.bind(this)"
         >
           <mat-option
-            *ngFor="let employee of filteredEmployees | async"
-            [value]="employee.id"
+            *ngFor="let emp of filteredEmployees | async"
+            [value]="emp"
           >
-            {{ employee.firstName }} {{ employee.lastName }} (ID:
-            {{ employee.id }})
+            {{ emp.firstName }} {{ emp.lastName }} (ID: {{ emp.id }})
           </mat-option>
         </mat-autocomplete>
-        <mat-error *ngIf="salaryForm.get('employeeId')?.hasError('required')">
-          Employee is required
-        </mat-error>
       </mat-form-field>
     </div>
 

@@ -60,6 +60,19 @@ export class InMemoryDataService implements InMemoryDbService {
         isActive: true,
         companyId: 1,
       },
+      {
+        id: 2,
+        firstName: "kebede",
+        lastName: "alemu",
+        email: "kebede@gmail.com",
+        phone: "0934345678",
+        position: "frotnend Stack Developer",
+        departmentId: 1, // Changed to match department IDs
+        hireDate: new Date("2022-05-10"),
+        salary: 80000, // Added base salary
+        isActive: true,
+        companyId: 1,
+      },
       // ... other employees
     ];
 
