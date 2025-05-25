@@ -1,8 +1,4 @@
 <div class="company-form-container">
-  <h2 mat-dialog-title>
-    {{ data === "add" ? "Add New Company" : "Edit Company" }}
-  </h2>
-
   <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <mat-form-field appearance="outline" class="form-field">

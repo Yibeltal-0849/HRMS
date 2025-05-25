@@ -11,6 +11,7 @@ import { HrmsService } from "../../services/hrms.service";
 export class EmployeeFormComponent implements OnInit {
   employeeForm: FormGroup;
   employeeId: number;
+  departments: any[] = []; // ✅ List of departments for dropdown
 
   constructor(
     private fb: FormBuilder,
@@ -26,11 +27,17 @@ export class EmployeeFormComponent implements OnInit {
       email: ["", [Validators.required, Validators.email]],
       phone: [""],
       position: ["", Validators.required],
-      departmentId: [null, Validators.required],
+      departmentId: [null, Validators.required], // Will be set via dropdown
       hireDate: ["", Validators.required],
       isActive: [true],
     });
 
+    // ✅ Get departments for dropdown
+    this.hrmsService.getDepartments().subscribe((data) => {
+      this.departments = data;
+    });
+
+    // ✅ If editing an employee, prefill the form
     this.employeeId = +this.route.snapshot.paramMap.get("id");
     if (this.employeeId) {
       this.hrmsService.getEmployees().subscribe((emps) => {

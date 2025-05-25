@@ -26,8 +26,12 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Department ID</mat-label>
-      <input matInput type="number" formControlName="departmentId" />
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="departmentId" required>
+        <mat-option *ngFor="let dept of departments" [value]="dept.id">
+          {{ dept.name }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill">

@@ -63,6 +63,13 @@ const routes: Routes = [
       import("./employee/employee.module").then((m) => m.EmployeeModule),
   },
 
+  //users
+  {
+    path: "users",
+    loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
+  },
+  // { path: "", redirectTo: "/users/list", pathMatch: "full" },
+
   //salary
   {
     path: "salaries",

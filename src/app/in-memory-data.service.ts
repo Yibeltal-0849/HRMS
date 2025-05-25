@@ -49,19 +49,6 @@ export class InMemoryDataService implements InMemoryDbService {
       // ... other companies
     ];
 
-    const users = [
-      {
-        id: 1,
-        username: "sara_t",
-        email: "sara@technova.com",
-        role: "manager",
-        isActive: true,
-        employeeId: 1,
-        companyId: 1,
-      },
-      // ... other users
-    ];
-
     const departments = [
       {
         id: 1,
@@ -111,6 +98,33 @@ export class InMemoryDataService implements InMemoryDbService {
         companyId: 1,
       },
       // ... other employees
+    ];
+
+    const users = [
+      {
+        id: 1,
+        username: "admin",
+        email: "admin@company.com",
+        password: "admin123",
+        role: "admin",
+        isActive: true,
+        employeeId: 1, //from employee id
+        companyId: 1, // come company id
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 2,
+        username: "recruiter",
+        email: "recruiter@company.com",
+        password: "123",
+        role: "recruiter",
+        isActive: true,
+        employeeId: 2, //from employee id
+        companyId: 2, // come company id
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ];
 
     const jobs = [

@@ -1,0 +1,105 @@
+.user-form-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+
+  form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    mat-form-field {
+      width: 100%;
+
+      // Make inputs full width on small screens
+      .mat-form-field-infix {
+        width: 100%;
+      }
+    }
+
+    mat-slide-toggle {
+      margin: 10px 0;
+    }
+
+    .success-message {
+      padding: 15px;
+      background-color: #4caf50;
+      color: white;
+      border-radius: 4px;
+      text-align: center;
+      margin: 10px 0;
+      animation: fadeIn 0.5s;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+
+      button {
+        flex: 1 1 auto;
+        min-width: 120px;
+
+        // Stack buttons vertically on very small screens
+        @media (max-width: 400px) {
+          flex: 1 1 100%;
+        }
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    padding: 15px;
+
+    form {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+
+    form {
+      padding: 15px;
+      gap: 15px;
+    }
+  }
+}
+
+// Animation for success message
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Additional global styles for better form appearance
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.mat-slide-toggle {
+  margin-bottom: 10px;
+}
+
+// Ensure selects don't overflow on small screens
+.mat-select-value {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

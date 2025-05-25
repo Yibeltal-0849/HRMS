@@ -1,139 +1,127 @@
 .department-form-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 2rem;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-  h2 {
-    color: #2c3e50;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .alert {
-    padding: 12px 16px;
+  // Success message styling
+  .alert-success {
+    padding: 1rem;
+    background-color: #d4edda;
+    color: #155724;
     border-radius: 4px;
-    margin-bottom: 20px;
-
-    &-success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
+    border: 1px solid #c3e6cb;
+    margin-bottom: 1.5rem;
   }
 
   form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
     .form-group {
-      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
 
       label {
-        display: block;
-        margin-bottom: 0.5rem;
         font-weight: 500;
-        color: #4a5568;
+        color: #495057;
       }
 
       .form-control {
-        width: 100%;
-        padding: 10px 12px;
-        font-size: 1rem;
-        line-height: 1.5;
-        color: #495057;
-        background-color: #fff;
-        background-clip: padding-box;
+        padding: 0.75rem 1rem;
         border: 1px solid #ced4da;
         border-radius: 4px;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        font-size: 1rem;
+        transition: border-color 0.15s ease-in-out;
 
         &:focus {
-          border-color: #4a90e2;
+          border-color: #80bdff;
           outline: 0;
-          box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
 
         &.is-invalid {
-          border-color: #e53e3e;
-
-          &:focus {
-            box-shadow: 0 0 0 0.2rem rgba(229, 62, 62, 0.25);
-          }
+          border-color: #dc3545;
         }
       }
 
-      select.form-control {
-        height: calc(2.25rem + 2px);
+      .invalid-feedback {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
       }
 
-      .invalid-feedback {
-        width: 100%;
-        margin-top: 0.25rem;
-        font-size: 0.875rem;
-        color: #e53e3e;
+      select.form-control {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1rem;
       }
     }
 
     .form-buttons {
       display: flex;
-      gap: 16px;
-      margin-top: 2rem;
+      gap: 1rem;
+      margin-top: 1rem;
 
       .btn {
-        padding: 10px 20px;
-        font-size: 1rem;
-        line-height: 1.5;
+        padding: 0.75rem 1.5rem;
         border-radius: 4px;
+        font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease;
 
         &-primary {
-          color: #fff;
-          background-color: #4a90e2;
-          border: 1px solid #4a90e2;
+          background-color: #007bff;
+          border: 1px solid #007bff;
+          color: white;
 
           &:hover {
-            background-color: #3a7bc8;
-            border-color: #3672bd;
+            background-color: #0069d9;
+            border-color: #0062cc;
           }
 
           &:disabled {
-            background-color: #a0bce8;
-            border-color: #a0bce8;
+            background-color: #6c757d;
+            border-color: #6c757d;
             cursor: not-allowed;
           }
         }
 
         &-secondary {
-          color: #4a5568;
-          background-color: #fff;
-          border: 1px solid #ced4da;
+          background-color: #6c757d;
+          border: 1px solid #6c757d;
+          color: white;
 
           &:hover {
-            background-color: #f8f9fa;
+            background-color: #5a6268;
+            border-color: #545b62;
           }
         }
       }
     }
   }
-}
 
-// Responsive adjustments
-@media (max-width: 768px) {
-  .department-form-container {
-    padding: 20px;
-    margin: 0 16px;
-    max-width: 100%;
+  // Responsive adjustments
+  @media (max-width: 992px) {
+    padding: 1.5rem;
+  }
 
-    h2 {
-      font-size: 1.3rem;
-    }
+  @media (max-width: 768px) {
+    padding: 1.25rem;
+    margin: 0 1rem;
 
     form {
+      gap: 1.25rem;
+
       .form-buttons {
         flex-direction: column;
-        gap: 12px;
+        gap: 0.75rem;
 
         .btn {
           width: 100%;
@@ -141,108 +129,19 @@
       }
     }
   }
-}
 
-@media (max-width: 480px) {
-  .department-form-container {
-    padding: 16px;
+  @media (max-width: 576px) {
+    padding: 1rem;
+    margin: 0 0.5rem;
     box-shadow: none;
-    border: 1px solid #e2e8f0;
-
-    h2 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
+    border-radius: 0;
 
     form {
+      gap: 1rem;
+
       .form-group {
-        margin-bottom: 1rem;
-
         .form-control {
-          padding: 8px 10px;
-          font-size: 0.9rem;
-        }
-      }
-
-      .form-buttons {
-        margin-top: 1.5rem;
-      }
-    }
-  }
-}
-
-// Dark mode support
-@media (prefers-color-scheme: dark) {
-  .department-form-container {
-    background-color: #2d3748;
-    border-color: #4a5568;
-
-    h2 {
-      color: #f7fafc;
-    }
-
-    .alert-success {
-      background-color: #22543d;
-      color: #f0fff4;
-      border-color: #276749;
-    }
-
-    form {
-      .form-group {
-        label {
-          color: #e2e8f0;
-        }
-
-        .form-control {
-          color: #f7fafc;
-          background-color: #4a5568;
-          border-color: #718096;
-
-          &:focus {
-            border-color: #63b3ed;
-            box-shadow: 0 0 0 0.2rem rgba(99, 179, 237, 0.25);
-          }
-
-          &.is-invalid {
-            border-color: #fc8181;
-
-            &:focus {
-              box-shadow: 0 0 0 0.2rem rgba(252, 129, 129, 0.25);
-            }
-          }
-        }
-
-        .invalid-feedback {
-          color: #fc8181;
-        }
-      }
-
-      .form-buttons {
-        .btn {
-          &-primary {
-            background-color: #4299e1;
-            border-color: #4299e1;
-
-            &:hover {
-              background-color: #3182ce;
-              border-color: #3182ce;
-            }
-
-            &:disabled {
-              background-color: #2b6cb0;
-              border-color: #2b6cb0;
-            }
-          }
-
-          &-secondary {
-            color: #f7fafc;
-            background-color: #4a5568;
-            border-color: #718096;
-
-            &:hover {
-              background-color: #2d3748;
-            }
-          }
+          padding: 0.65rem 0.9rem;
         }
       }
     }

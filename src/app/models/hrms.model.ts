@@ -61,6 +61,19 @@ export interface Employee {
   companyId: number; // 🔗 Reference to Company
 }
 
+export interface user {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  role: "admin" | "recruiter" | "employee" | "manager" | string;
+  isActive: boolean;
+  employeeId: number;
+  companyId: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface Candidate {
   id: number;
   firstName: string;

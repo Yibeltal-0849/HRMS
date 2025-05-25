@@ -66,31 +66,6 @@ export class HrmsService {
       .pipe(catchError(this.handleError<any>("deleteCompany")));
   }
 
-  // ========== Users ==========
-  getUsers(): Observable<any[]> {
-    return this.http
-      .get<any[]>(`${this.apiUrl}/users`)
-      .pipe(catchError(this.handleError<any[]>("getUsers", [])));
-  }
-
-  addUser(user: any): Observable<any> {
-    return this.http
-      .post<any>(`${this.apiUrl}/users`, user, this.httpOptions)
-      .pipe(catchError(this.handleError<any>("addUser")));
-  }
-
-  updateUser(user: any): Observable<any> {
-    return this.http
-      .put<any>(`${this.apiUrl}/users/${user.id}`, user, this.httpOptions)
-      .pipe(catchError(this.handleError<any>("updateUser")));
-  }
-
-  deleteUser(id: number): Observable<any> {
-    return this.http
-      .delete<any>(`${this.apiUrl}/users/${id}`, this.httpOptions)
-      .pipe(catchError(this.handleError<any>("deleteUser")));
-  }
-
   // ========== Employees ==========
   getEmployees(): Observable<any[]> {
     return this.http
@@ -118,6 +93,44 @@ export class HrmsService {
     return this.http
       .delete<any>(`${this.apiUrl}/employees/${id}`, this.httpOptions)
       .pipe(catchError(this.handleError<any>("deleteEmployee")));
+  }
+
+  //======users======//
+
+  // Get all users
+  // Get all users
+  getUsers(): Observable<any[]> {
+    return this.http
+      .get<any[]>(`${this.apiUrl}/users`)
+      .pipe(catchError(this.handleError<any[]>("getUsers", [])));
+  }
+
+  // Get user by ID
+  getUserById(id: number): Observable<any> {
+    return this.http
+      .get<any>(`${this.apiUrl}/users/${id}`)
+      .pipe(catchError(this.handleError<any>("getUserById")));
+  }
+
+  // Add a new user
+  addUser(user: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.apiUrl}/users`, user, this.httpOptions)
+      .pipe(catchError(this.handleError<any>("addUser")));
+  }
+
+  // Update existing user
+  updateUser(user: any): Observable<any> {
+    return this.http
+      .put<any>(`${this.apiUrl}/users/${user.id}`, user, this.httpOptions)
+      .pipe(catchError(this.handleError<any>("updateUser")));
+  }
+
+  // Delete user by ID
+  deleteUser(id: number): Observable<any> {
+    return this.http
+      .delete<any>(`${this.apiUrl}/users/${id}`, this.httpOptions)
+      .pipe(catchError(this.handleError<any>("deleteUser")));
   }
 
   // ========== Departments ==========

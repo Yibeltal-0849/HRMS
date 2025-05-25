@@ -1,1 +1,66 @@
-<p>user-form works!</p>
+<div class="user-form-container">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Username -->
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput name="username" [(ngModel)]="user.username" required />
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" [(ngModel)]="user.email" required email />
+    </mat-form-field>
+
+    <!-- Role -->
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select name="role" [(ngModel)]="user.role" required>
+        <mat-option value="admin">Admin</mat-option>
+        <mat-option value="recruiter">Recruiter</mat-option>
+        <mat-option value="employee">Employee</mat-option>
+        <mat-option value="manager">Manager</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Employee ID -->
+    <mat-form-field appearance="fill">
+      <mat-label>Employee</mat-label>
+      <mat-select name="employeeId" [(ngModel)]="user.employeeId" required>
+        <mat-option *ngFor="let emp of employees" [value]="emp.id">
+          {{ emp.firstName }} {{ emp.lastName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Company ID -->
+    <mat-form-field appearance="fill">
+      <mat-label>Company</mat-label>
+      <mat-select name="companyId" [(ngModel)]="user.companyId" required>
+        <mat-option *ngFor="let comp of companies" [value]="comp.id">
+          {{ comp.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Active Toggle -->
+    <mat-slide-toggle [(ngModel)]="user.isActive" name="isActive">
+      Active
+    </mat-slide-toggle>
+
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="button-group">
+      <button mat-raised-button color="primary" type="submit">
+        {{ user.id ? "Update" : "Add" }} User
+      </button>
+      <button mat-button color="warn" type="button" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
