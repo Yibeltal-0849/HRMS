@@ -39,10 +39,6 @@ const routes: Routes = [
   // { path: "", redirectTo: "/company", pathMatch: "full" },
 
   //user
-  {
-    path: "users",
-    loadChildren: () => import("./user/user.module").then((m) => m.UserModule),
-  },
 
   //department
   {
@@ -90,6 +86,21 @@ const routes: Routes = [
       import("./candidate/candidate.module").then((m) => m.CandidateModule),
   },
   // { path: "", redirectTo: "/candidates/list", pathMatch: "full" },
+
+  //cnadidater
+  { path: "", redirectTo: "jobs/list/candidater", pathMatch: "full" },
+  {
+    path: "jobs/list",
+    loadChildren: () =>
+      import("./candidater/candidater.module").then((m) => m.CandidaterModule),
+  },
+
+  { path: "", redirectTo: "jobs/apply", pathMatch: "full" },
+  {
+    path: "jobs",
+    loadChildren: () =>
+      import("./candidater/candidater.module").then((m) => m.CandidaterModule),
+  },
 ];
 
 @NgModule({

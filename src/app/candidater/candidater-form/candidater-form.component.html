@@ -1,0 +1,84 @@
+<div class="form-container">
+  <h2>Please Fill required field</h2>
+
+  <!-- ✅ Success Message -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Job ID</mat-label>
+        <mat-select formControlName="jobId" required>
+          <mat-option *ngFor="let job of jobs" [value]="job.id">
+            {{ job.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Resume URL</mat-label>
+        <input matInput formControlName="resumeUrl" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Skills (comma separated)</mat-label>
+        <input matInput formControlName="skills" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Experience</mat-label>
+        <mat-select formControlName="experience" required>
+          <mat-option value="Entry">Entry</mat-option>
+          <mat-option value="Junior">Junior</mat-option>
+          <mat-option value="Senior">Senior</mat-option>
+          <mat-option value="Executive">Executive</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Education</mat-label>
+        <input matInput formControlName="education" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Source</mat-label>
+        <mat-select formControlName="source" required>
+          <mat-option value="website">Website</mat-option>
+          <mat-option value="linkedin">LinkedIn</mat-option>
+          <mat-option value="referral">Referral</mat-option>
+          <mat-option value="indeed">Indeed</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

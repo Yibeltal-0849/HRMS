@@ -28,8 +28,8 @@ export interface User {
   id: number;
   username: string;
   email: string;
-  password?: string;
-  role: "admin" | "manager" | "employee" | "hr";
+  password: string;
+  role: "admin" | "manager" | "employee" | "hr" | "recruiter";
   isActive: boolean;
   createdAt?: Date;
   updatedAt?: Date;

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HrmsService } from "../../services/hrms.service";
-import { Job } from "../../models/hrms.model";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-job-form",
@@ -12,14 +12,15 @@ import { Job } from "../../models/hrms.model";
 export class JobFormComponent implements OnInit {
   jobForm: FormGroup;
   jobId: number;
-  departments = [];
-  companies = [];
+  departments: any[] = [];
+  companies: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private hrmsService: HrmsService
+    private hrmsService: HrmsService,
+    private snackBar: MatSnackBar
   ) {
     this.jobForm = this.fb.group({
       title: ["", Validators.required],
@@ -42,6 +43,7 @@ export class JobFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Load departments and companies
     this.hrmsService
       .getDepartments()
       .subscribe((data) => (this.departments = data));
@@ -49,29 +51,42 @@ export class JobFormComponent implements OnInit {
       .getCompanies()
       .subscribe((data) => (this.companies = data));
 
+    // Check for editing mode
     this.jobId = +this.route.snapshot.paramMap.get("id");
     if (this.jobId) {
       this.hrmsService
-        .getJob(this.jobId)
-        .subscribe((job) => this.jobForm.patchValue(job));
+        .getJobById(this.jobId) // ✅ Correct method
+        .subscribe((job) => {
+          if (job) {
+            this.jobForm.patchValue(job);
+          }
+        });
     }
   }
 
   onSubmit() {
     if (this.jobForm.valid) {
-      const job: Job = this.jobForm.value;
+      const job: any = this.jobForm.value;
+
       if (this.jobId) {
         job.id = this.jobId;
-        this.hrmsService
-          .updateJob(job)
-          .subscribe(() => this.router.navigate(["/jobs/list"]));
+        this.hrmsService.updateJob(job).subscribe(() => {
+          this.snackBar.open("Job updated successfully!", "Close", {
+            duration: 3000,
+          });
+          this.router.navigate(["/jobs/list"]);
+        });
       } else {
-        this.hrmsService
-          .addJob(job)
-          .subscribe(() => this.router.navigate(["/jobs/list"]));
+        this.hrmsService.addJob(job).subscribe(() => {
+          this.snackBar.open("Job added successfully!", "Close", {
+            duration: 4000,
+          });
+          this.router.navigate(["/jobs/list"]);
+        });
       }
     }
   }
+
   onCancel() {
     this.router.navigate(["/jobs/list"]);
   }

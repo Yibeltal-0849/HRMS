@@ -12,7 +12,7 @@ import { Salary } from "../models/hrms.model";
   providedIn: "root",
 })
 export class HrmsService {
-  private apiUrl = "api";
+  private apiUrl = "/api";
   private httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" }),
   };
@@ -147,33 +147,27 @@ export class HrmsService {
 
   // ========================= Jobs =========================
   getJobs(): Observable<any[]> {
-    return this.http
-      .get<any[]>(`${this.apiUrl}/jobs`)
-      .pipe(catchError(this.handleError<any[]>("getJobs", [])));
+    return this.http.get<any[]>(`${this.apiUrl}/jobs`);
   }
 
-  getJob(id: number): Observable<any> {
-    return this.http
-      .get<any>(`${this.apiUrl}/jobs/${id}`)
-      .pipe(catchError(this.handleError<any>("getJob")));
+  // GET job by ID
+  getJobById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/jobs/${id}`);
   }
 
+  // ADD new job
   addJob(job: any): Observable<any> {
-    return this.http
-      .post<any>(`${this.apiUrl}/jobs`, job, this.httpOptions)
-      .pipe(catchError(this.handleError<any>("addJob")));
+    return this.http.post<any>(`${this.apiUrl}/jobs`, job);
   }
 
+  // UPDATE job
   updateJob(job: any): Observable<any> {
-    return this.http
-      .put<any>(`${this.apiUrl}/jobs/${job.id}`, job, this.httpOptions)
-      .pipe(catchError(this.handleError<any>("updateJob")));
+    return this.http.put<any>(`${this.apiUrl}/jobs/${job.id}`, job);
   }
 
+  // DELETE job
   deleteJob(id: number): Observable<any> {
-    return this.http
-      .delete<any>(`${this.apiUrl}/jobs/${id}`, this.httpOptions)
-      .pipe(catchError(this.handleError<any>("deleteJob")));
+    return this.http.delete(`${this.apiUrl}/jobs/${id}`);
   }
 
   // ... (Rest of the existing methods: candidates,  attendance, salary, leave requests, etc.)

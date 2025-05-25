@@ -1,0 +1,38 @@
+<div class="job-container">
+  <mat-card
+    *ngFor="let job of jobs"
+    class="job-card"
+    [ngClass]="{ inactive: !job.isActive }"
+  >
+    <mat-card-header>
+      <mat-icon>work_outline</mat-icon>
+      <mat-card-title>{{ job.title }}</mat-card-title>
+      <mat-card-subtitle
+        >{{ job.location }} - {{ job.type | titlecase }}</mat-card-subtitle
+      >
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>{{ job.description }}</p>
+      <p><strong>Skill:</strong>{{ job.requirements }}</p>
+      <p><strong>Experience:</strong> {{ job.experienceLevel | titlecase }}</p>
+      <p><strong>Remote:</strong> {{ job.isRemote ? "Yes" : "No" }}</p>
+      <p>
+        <strong>Salary:</strong> {{ job.salaryRangeMin || "-" }} -
+        {{ job.salaryRangeMax || "-" }}
+      </p>
+      <p><strong>Posted:</strong> {{ job.postedDate | date }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <a
+        mat-button
+        color="primary"
+        routerLink="/jobs/apply"
+        routerLinkActive="active"
+      >
+        Apply Now
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>
