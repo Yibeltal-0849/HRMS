@@ -67,18 +67,12 @@ export interface Candidate {
   lastName: string;
   email: string;
   phone: string;
-  resumeUrl?: string;
-  coverLetter?: string;
-  appliedPosition: string;
-  applicationDate: Date;
-  status: "applied" | "interviewing" | "offered" | "hired" | "rejected";
-  interviewDate?: Date;
-  feedback?: string;
-  referredBy?: string;
-  source?: "website" | "linkedin" | "referral" | "indeed" | "other";
-  skills?: string[];
-  experience?: number;
-  education?: string;
+  jobId: number;
+  resumeUrl: string;
+  skills: string[];
+  experience: "Entry" | "Junior" | "Senior" | "Executive";
+  education: string;
+  source: "website" | "linkedin" | "referral" | "indeed" | "other";
 }
 
 export interface Job {

@@ -223,6 +223,47 @@ export class InMemoryDataService implements InMemoryDbService {
         isActive: true,
       },
     ];
+    const candidates = [
+      {
+        id: 1,
+        firstName: "Alex",
+        lastName: "Johnson",
+        email: "alex.johnson@example.com",
+        phone: "555-0303",
+        jobId: "1", //come from job
+        resumeUrl: "http://example.com/resumes/alex.pdf",
+        skills: ["JavaScript", "Angular", "TypeScript"],
+        experience: "Junior",
+        education: "BSc Computer Science",
+        source: "linkedin",
+      },
+      {
+        id: 2,
+        firstName: "Maria",
+        lastName: "Gomez",
+        email: "maria.gomez@example.com",
+        phone: "555-0456",
+        jobId: "2", //come from job
+        resumeUrl: "http://example.com/resumes/maria.pdf",
+        skills: ["Java", "Spring Boot", "MySQL"],
+        experience: "Senior",
+        education: "MSc Software Engineering",
+        source: "website",
+      },
+      {
+        id: 3,
+        firstName: "Mekkias",
+        lastName: "Belay",
+        email: "david.lee@example.com",
+        phone: "555-0678",
+        jobId: "3", //come from job
+        resumeUrl: "http://example.com/resumes/david.pdf",
+        skills: ["JavaScript", "Node.js", "SQL"],
+        experience: "Entry",
+        education: "BSc Information Technology",
+        source: "referral",
+      },
+    ];
 
     return {
       users,
@@ -231,6 +272,7 @@ export class InMemoryDataService implements InMemoryDbService {
       company,
       salaries,
       jobs,
+      candidates,
     };
   }
 

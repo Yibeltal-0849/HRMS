@@ -176,7 +176,56 @@ export class HrmsService {
       .pipe(catchError(this.handleError<any>("deleteJob")));
   }
 
-  // ... (Rest of the existing methods: candidates, jobs, attendance, salary, leave requests, etc.)
+  // ... (Rest of the existing methods: candidates,  attendance, salary, leave requests, etc.)
+
+  // ========== Candidates ==========
+
+  /** GET: fetch all candidates */
+  getCandidates(): Observable<any[]> {
+    return this.http
+      .get<any[]>(`${this.apiUrl}/candidates`)
+      .pipe(catchError(this.handleError<any[]>("getCandidates", [])));
+  }
+
+  /** GET: fetch single candidate by ID */
+  getCandidateById(id: number): Observable<any> {
+    return this.http
+      .get<any>(`${this.apiUrl}/candidates/${id}`)
+      .pipe(catchError(this.handleError<any>("getCandidateById")));
+  }
+
+  /** POST: add a new candidate */
+  addCandidate(candidate: any): Observable<any> {
+    // ✅ Ensure skills is always an array before sending to the backend
+    if (typeof candidate.skills === "string") {
+      candidate.skills = candidate.skills
+        .split(",")
+        .map((skill) => skill.trim())
+        .filter((skill) => skill.length > 0);
+    }
+
+    return this.http
+      .post<any>(`${this.apiUrl}/candidates`, candidate, this.httpOptions)
+      .pipe(catchError(this.handleError<any>("addCandidate")));
+  }
+
+  /** PUT: update an existing candidate */
+  updateCandidate(candidate: any): Observable<any> {
+    return this.http
+      .put<any>(
+        `${this.apiUrl}/candidates/${candidate.id}`,
+        candidate,
+        this.httpOptions
+      )
+      .pipe(catchError(this.handleError<any>("updateCandidate")));
+  }
+
+  /** DELETE: remove a candidate by ID */
+  deleteCandidate(id: number): Observable<any> {
+    return this.http
+      .delete<any>(`${this.apiUrl}/candidates/${id}`, this.httpOptions)
+      .pipe(catchError(this.handleError<any>("deleteCandidate")));
+  }
 
   // ========== Salary ==========
   getSalaries(): Observable<Salary[]> {
