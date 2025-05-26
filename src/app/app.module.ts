@@ -10,6 +10,7 @@ import { AppComponent } from "./app.component";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { MaterialModule } from "./material.module";
 import { HrmsService } from "./services/hrms.service";
+// import { CandidateLayoutComponent } from "./layouts/candidate-layout/candidate-layout.component";
 
 @NgModule({
   declarations: [AppComponent],

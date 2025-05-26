@@ -102,7 +102,7 @@ const routes: Routes = [
       import("./candidater/candidater.module").then((m) => m.CandidaterModule),
   },
 
-  { path: "", redirectTo: "jobs/apply", pathMatch: "full" },
+  // { path: "", redirectTo: "jobs/apply", pathMatch: "full" },
   {
     path: "jobs",
     loadChildren: () =>
