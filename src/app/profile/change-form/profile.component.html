@@ -1,0 +1,72 @@
+<div class="form-container" *ngIf="!loading; else loadingSpinner">
+  <h2>{{ isEdit ? "Edit Profile" : "Create Profile" }}</h2>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <!-- Username -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput [(ngModel)]="user.username" name="username" required />
+      <mat-error *ngIf="userForm.controls['username']?.invalid">
+        Username is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="user.email" name="email" required email />
+      <mat-error *ngIf="userForm.controls['email']?.invalid">
+        Valid email is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Password (only shown when creating new user) -->
+    <mat-form-field appearance="outline" class="full-width" *ngIf="!isEdit">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [(ngModel)]="user.password"
+        name="password"
+        type="password"
+        required
+      />
+    </mat-form-field>
+
+    <!-- Role Selector -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Role</mat-label>
+      <mat-select [(ngModel)]="user.role" name="role" required>
+        <mat-option value="admin">Admin</mat-option>
+        <mat-option value="recruiter">Recruiter</mat-option>
+        <mat-option value="employee">Employee</mat-option>
+        <mat-option value="manager">Manager</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Active Toggle -->
+    <mat-slide-toggle [(ngModel)]="user.isActive" name="isActive">
+      Active
+    </mat-slide-toggle>
+
+    <!-- Action Buttons -->
+    <div class="btn-group">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="userForm.invalid"
+      >
+        {{ isEdit ? "Update" : "Create" }}
+      </button>
+      <button mat-raised-button color="warn" type="button" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template #loadingSpinner>
+  <div class="spinner-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading profile data...</p>
+  </div>
+</ng-template>

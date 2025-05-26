@@ -1,28 +1,21 @@
-// import { NgModule } from "@angular/core";
-// import { Routes, RouterModule } from "@angular/router";
-// import { EmployeeListComponent } from "./components/employee-list/employee-list.component";
-// import { EmployeeFormComponent } from "./components/employee-form/employee-form.component";
-
-// const routes: Routes = [
-//   { path: "employees", component: EmployeeListComponent },
-//   { path: "employees/new", component: EmployeeFormComponent },
-//   { path: "employees/edit/:id", component: EmployeeFormComponent },
-//   { path: "", redirectTo: "/employees", pathMatch: "full" },
-// ];
-
-// @NgModule({
-//   imports: [RouterModule.forRoot(routes)],
-//   exports: [RouterModule],
-// })
-// export class AppRoutingModule {}
-
-// src/app/app-routing.module.ts
-
-// src/app/app-routing.module.ts
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 const routes: Routes = [
+  { path: "", redirectTo: "/login", pathMatch: "full" },
+  {
+    path: "",
+    loadChildren: () =>
+      import("./userLogin/login.module").then((m) => m.LoginModule),
+  },
+  //profile change
+  {
+    path: "profile",
+    loadChildren: () =>
+      import("./profile/profile.module").then((m) => m.ProfileModule),
+  },
+
+  //dashboard
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   {
     path: "dashboard",

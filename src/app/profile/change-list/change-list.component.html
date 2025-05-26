@@ -1,0 +1,20 @@
+<div class="change-list-container">
+  <h2>User Management</h2>
+  <mat-card *ngFor="let user of users" class="user-card">
+    <div class="user-info">
+      <div>
+        <strong>{{ user.username }}</strong>
+      </div>
+      <div>Email: {{ user.email }}</div>
+      <div>Role: {{ user.role }}</div>
+    </div>
+    <div class="actions">
+      <button mat-icon-button color="primary" (click)="onEdit(user.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onDelete(user.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>

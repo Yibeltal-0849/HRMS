@@ -1,272 +1,188 @@
-// ======================
-// VARIABLES
-// ======================
-$primary-color: #3f51b5;
-$accent-color: #ff4081;
-$light-color: #f5f5f5;
-$dark-color: #333;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$sidenav-width: 250px;
-$sidenav-collapsed-width: 70px;
-
-// ======================
-// MIXINS
-// ======================
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// ======================
-// GLOBAL STYLES
-// ======================
+/* Reset & Full Height Layout */
+html,
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; // Only prevent horizontal scrolling
+  font-family: Arial, sans-serif;
 }
 
-.mat-toolbar {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Main Layout Container */
+.sidenav-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-// ======================
-// HEADER STYLES
-// ======================
-mat-toolbar.header-toolbar {
+/* Toolbar/Header */
+.main-toolbar {
   position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  height: 64px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
   padding: 0 16px;
+  background-color: #3f51b5;
+  color: white;
+}
 
-  .app-title {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-left: 16px;
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.nav-links,
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mat-toolbar .mat-icon {
+  margin-right: 4px;
+}
+
+/* Sidenav Styling */
+.sidenav {
+  width: 250px;
+}
+
+mat-sidenav {
+  background: #f4f4f4;
+}
+
+mat-sidenav a {
+  font-weight: 500;
+}
+
+mat-sidenav a.active {
+  background-color: #e0e0e0;
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  padding-block: 10px;
+  padding-inline: 16px;
+  overflow: auto;
+}
+
+.footer {
+  background-color: #3f51b5;
+  padding: 1rem 0;
+  font-size: 1rem;
+  color: white;
+  border-top: 1px solid #dee2e6;
+
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
-  .toolbar-spacer {
-    flex: 1 1 auto;
+  .footer-copyright {
+    margin-bottom: 0.5rem;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+      text-align: left;
+    }
   }
 
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+
+    .footer-link {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #b3008c;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* Active Link Styling */
+a.active,
+a.active mat-icon,
+a.active span {
+  color: #ff3b83 !important;
+  font-weight: bold;
+}
+
+.dropdown-links {
+  display: flex;
+  flex-direction: column;
+  background: #e3f2fd;
+  padding: 8px 16px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-links a,
+.dropdown-links button {
+  justify-content: flex-start;
+  padding: 8px 0;
+  font-weight: 500;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
   .nav-links,
   .auth-links {
     display: none;
+  }
 
-    @media (min-width: $breakpoint-md) {
-      display: flex;
-      align-items: center;
-    }
+  .app-title {
+    cursor: pointer;
+  }
+}
 
-    a,
-    button {
-      color: white;
-      text-decoration: none;
-      margin: 0 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 200px;
+  }
 
-      mat-icon {
-        margin-right: 8px;
-        font-size: 20px;
-      }
-    }
+  .main-content {
+    padding: 8px;
+  }
+
+  .app-title {
+    font-size: 18px;
   }
 
   .mobile-menu-btn {
-    @media (min-width: $breakpoint-md) {
-      display: none;
-    }
+    display: inline-flex;
   }
 }
-
-// ======================
-// LEFT SIDEBAR (SIDENAV) STYLES
-// ======================
-.sidenav-container {
-  display: flex;
-  flex: 1; // Take remaining space
-  background-color: $light-color;
-
-  .sidenav {
-    width: $sidenav-width;
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 3px 0 6px rgba(0, 0, 0, 0.16);
-    background-color: white;
-    overflow-y: auto; // Allow scrolling only for sidenav
-
-    @media (max-width: $breakpoint-md) {
-      width: $sidenav-collapsed-width;
-      overflow: hidden;
-
-      &.expanded {
-        width: $sidenav-width;
-      }
-    }
-
-    mat-nav-list {
-      padding-top: 0;
-
-      a.mat-list-item {
-        color: $dark-color;
-        font-size: 0.875rem;
-        height: 48px;
-        margin: 4px 0;
-
-        &:hover {
-          background-color: rgba($primary-color, 0.1);
-        }
-
-        &.active {
-          background-color: rgba($primary-color, 0.2);
-          color: $primary-color;
-          font-weight: 500;
-        }
-
-        mat-icon {
-          margin-right: 16px;
-          color: rgba($dark-color, 0.6);
-        }
-      }
-
-      mat-expansion-panel {
-        box-shadow: none;
-        border-radius: 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-
-        mat-expansion-panel-header {
-          padding: 0 16px;
-          height: 48px;
-
-          &:hover {
-            background-color: rgba($primary-color, 0.1) !important;
-          }
-
-          mat-panel-title {
-            font-size: 0.875rem;
-            font-weight: 500;
-          }
-        }
-
-        mat-action-list {
-          padding: 0;
-
-          a.mat-list-item {
-            padding-left: 48px;
-            font-size: 0.8125rem;
-
-            &.active {
-              background-color: rgba($primary-color, 0.15);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // ======================
-  // MAIN CONTENT AREA
-  // ======================
-  .main-content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto; // Allow scrolling only for main content
-    min-height: calc(100vh - 124px); // Viewport height minus header and footer
-
-    @media (min-width: $breakpoint-lg) {
-      padding: 30px;
-    }
-
-    .content {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
-  }
-}
-
-// ======================
-// FOOTER STYLES
-// ======================
-mat-toolbar.footer {
-  width: 100%;
-  height: 60px;
-  font-size: 0.875rem;
-  margin-top: auto; // Push footer to bottom
-}
-
-// ======================
-// RESPONSIVE ADJUSTMENTS
-// ======================
-@media (max-width: $breakpoint-md) {
-  .sidenav-container {
-    position: relative;
-
-    .sidenav {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      z-index: 100;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-
-      &.mat-sidenav-opened {
-        transform: translateX(0);
-      }
-    }
-
-    .main-content {
-      padding: 15px;
-      min-height: calc(100vh - 124px);
-    }
-  }
-
-  mat-toolbar.header-toolbar {
-    .app-title {
-      margin-left: 8px;
-    }
-  }
-}
-
-// ======================
-// ACTIVE LINK STYLING
-// ======================
-.active {
-  // Default active styles (for header)
-  font-weight: 500;
-  color: white !important;
-  background-color: rgba(white, 0.1) !important;
-
-  mat-icon {
-    color: white !important;
-  }
-
-  // Special styles for sidenav active links
-  .sidenav & {
-    color: $primary-color !important;
-    background-color: rgba($primary-color, 0.1) !important;
-
-    mat-icon {
-      color: $primary-color !important;
-    }
-  }
-
-  // Special styles for expansion panel active links
-  mat-expansion-panel & {
-    color: $primary-color !important;
-    background-color: rgba($primary-color, 0.1) !important;
-
-    mat-icon {
-      color: $primary-color !important;
-    }
+@media (max-width: 600px) {
+  .footers {
+    display: block !important;
   }
 }

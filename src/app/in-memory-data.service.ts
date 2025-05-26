@@ -117,7 +117,7 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 2,
         username: "recruiter",
         email: "recruiter@company.com",
-        password: "123",
+        password: "123456",
         role: "recruiter",
         isActive: true,
         employeeId: 2, //from employee id

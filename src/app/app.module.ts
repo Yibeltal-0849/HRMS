@@ -1,6 +1,6 @@
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { HttpClientModule } from "@angular/common/http";
 import { InMemoryDataService } from "./in-memory-data.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";

@@ -107,9 +107,10 @@ export class HrmsService {
 
   // Get user by ID
   getUserById(id: number): Observable<any> {
-    return this.http
-      .get<any>(`${this.apiUrl}/users/${id}`)
-      .pipe(catchError(this.handleError<any>("getUserById")));
+    return this.http.get<any>(`${this.apiUrl}/users/${id}`).pipe(
+      tap((_) => console.log(`fetched user id=${id}`)),
+      catchError(this.handleError<any>(`getUser id=${id}`))
+    );
   }
 
   // Add a new user
